@@ -1,0 +1,176 @@
+-- used excel to merg steps, calories, intensity as hourly activity 
+-- 1) validate user id length across the table 
+
+select * from dailyactivity_merged;
+
+use bellabeat;
+
+select
+	id
+
+from 
+	dailyactivity_merged
+where length()(id) > 10 or length(id) < 10;
+
+-- 2) Selecting distinct IDs to find number of unique participants with daily activity data
+
+ select  distinct count(id) 
+
+from dailyactivity_merged;
+#33 unique IDs reported in DailyActivity table
+
+-- 3)selecting ids in sleep table 
+
+select 	
+	distinct id
+from sleep_day; 
+#24 unique ids in the sleep table 
+
+-- 4) selecting unique ids in the weight table 
+
+select 
+	distinct id 
+from 
+	weightlog_info;
+# 8 unique ids 
+
+-- finding start & end date on daily activity table 
+
+select 
+	min(activitydate) as start_date,
+    max(activitydate) as end_date
+from 
+	dailyactivity_merged;
+# start date 4/12/2016, end date 5/9/2016
+
+-- finding duplicates in other tables 
+
+select 
+	activitydate, id, count(*) as num_of_rows
+from dailyactivity_merged
+group by activitydate, id
+having num_of_rows >1;
+
+# no duplicates 
+
+select * from weightlog_info;
+
+select *, count(*) as number_weight
+from weightlog_info
+group by 1,2,3,4,5,6,7,8
+having number_weight >1;
+# no duplicates 
+
+select * from sleep_day; 
+
+select id,sleepday,totalsleeprecords,TotalMinutesAsleep,totaltimeinbed, count(*) as numbers_sleep 
+from sleep_day
+group by id, sleepday, TotalSleepRecords, TotalMinutesAsleep, totaltimeinbed
+having numbers_sleep >1;  
+
+# no duplicates 
+
+-- looking for records of 0 steps recorded 
+
+select 
+	id, count(*) as number_zerosteps_day
+from 
+	dailyactivity_merged
+group by id
+order by number_zerosteps_day desc; 
+# 15 participants 
+
+
+select 
+	sum(number_zerosteps_day) as totaldayswith_zerosteps 
+from
+	(select count(*) as number_zerosteps_day
+    from dailyactivity_merged
+    where TotalSteps = 0) as N;
+    #77 
+    
+-- identifying weekdays and weekends 
+
+SELECT ActivityDate, 
+	CASE 
+		WHEN DayOfWeek = 'Monday' THEN 'Weekday'
+		WHEN DayOfWeek = 'Tuesday' THEN 'Weekday'
+		WHEN DayOfWeek = 'Wednesday' THEN 'Weekday'
+		WHEN DayOfWeek = 'Thursday' THEN 'Weekday'
+		WHEN DayOfWeek = 'Friday' THEN 'Weekday'
+		ELSE 'Weekend' 
+	END AS PartOfWeek
+FROM
+	(SELECT *, DAYNAME(ActivityDate) AS DayOfWeek
+	FROM DailyActivity_merged) as temp;
+    
+    # Looking at average steps, distance, and calories per day of the week
+SELECT DAYNAME(ActivityDate) AS DayOfWeek, AVG(TotalSteps) AS AvgSteps, AVG(TotalDistance) AS AvgDistance, AVG(Calories) AS AvgCalories
+FROM dailyactivity_merged
+GROUP BY DayOfWeek
+ORDER BY AvgSteps DESC;
+;
+
+# Looking at average amount of time spent asleep and average time to fall asleep per day of the week
+SELECT DAYNAME(SleepDay) AS DayOfWeek, AVG(TotalMinutesAsleep) AS AvgMinutesAsleep, AVG(TotalMinutesAsleep / 60) AS AvgHoursAsleep, AVG(TotalTimeInBed - TotalMinutesAsleep) AS AvgTimeInMinutesToFallAsleep
+FROM Sleep_day
+GROUP BY DayOfWeek
+ORDER BY AvgHoursAsleep DESC;
+
+
+-- calculating number of users & averages 
+
+-- 1) tracking their physical activites
+
+select 
+	count(distinct id) as users_tracking_activity ,
+    avg(totalsteps) as average_steps,
+    avg(totaldistance) as average_distance,
+    avg(calories) as average_calories
+
+from 
+	bellabeat.dailyactivity_merged;
+    
+-- 2) tracking heart rate 
+
+	select 
+		count(distinct id) as user_tracking_heartrate,
+        avg(value) as average_heartrate,
+        min(value) as minimum_heartrate,
+        max(value) as max_heartrate
+    
+    from 
+		bellabeat.heartrate_seconds;
+        
+-- 3) tracking sleep 
+
+	select count(distinct id) as users_tracking_sleep,
+    avg(TotalMinutesAsleep)/60.0 as average_hours_asleep,
+    min(totalminutesasleep)/60.0 as minium_hours_asleep,
+    max(TotalMinutesAsleep)/60.0 as maxium_hours_asleep,
+    avg(totaltimeinbed)/60.0 as average_hous_inbed
+    
+    from 
+		bellabeat.sleep_day;
+	
+-- 4) tracking weight 
+
+	select count(distinct id) as users_tracking_weight,
+			avg(weightkg) as average_weight,
+            min(weightkg) as minium_weight,
+            max(weightkg) as maxium_weight
+	
+    from 
+		bellabeat.weightlog_info; 
+
+
+
+
+ 
+
+
+
+
+
+
+    
