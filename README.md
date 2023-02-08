@@ -1,3 +1,5 @@
+# A Google Data Analytics capstone project. Done in Microsoft Excel and my SQL workbench 
+
 # Google-cousera-case-study
 cleaning and analyzing data 
 
