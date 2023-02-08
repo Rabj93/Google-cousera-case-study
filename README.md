@@ -63,8 +63,7 @@ Tools:
     
      
  1. First we observe and familiarze ourselve with the data 
- 
- ![image.png](attachment:2d69b575-dd1c-4988-b97e-a8117adb9b16.png)
+ (see issues for pivot tables and graphs) 
  
  2. Consistency: To start, I identified the standard character length for each user ID (10). Across all tables, there were no    deviations from this and/or incorrect inputs.
  
@@ -73,8 +72,55 @@ Tools:
  4. Remove duplicates with the remove duplicate function in excel. (there are 33 uniques IDS, instead of 30. some users created additional ids during the study period.) 
   
  5. created new column for total minute; with the sum of very, fairly, lightly, and sedentary minutes.
- ![image.png](attachment:42d80852-182d-438a-a533-e6addc9f161a.png)
   
  6. convert Activitydate column from  to mm/yy/dd to yy/mm/dd.
   
-  ![image.png](attachment:966f22ce-d0a7-4333-b85a-67df1b7d1f88.png)`
+ # 4. Analyze 
+
+performed averages, min, & max using pivot tables
+
+(see issues for pivot tables and graphs) 
+
+# 5.Share
+
+Tracking usage across the week, in the above chart we can see the users usage drop significally during the weekends and picks back up on Tuesday.
+
+ Amount of Calories burned for every step. 
+  
+  with a positive connection, we can see the increase of calories burned with the range of > 0 - 15,000 steps
+  
+  As seen from the chart above: 
+  
+1. Sedentary minutes takes up most of the chart. 
+2. This graph shows users tracking daily activities(everyday movements) and not what the app was created for. Given that fairly active and very active minutes are considerably low.
+
+
+# 6.Act
+​
+Summary:
+​
+**Day of the week**
+​
+The most active days of the week are Tuesday & Saturday 
+The least active days of the week are Thursday & Sunday 
+​
+**Sleep**
+​
+Users tend to get the most sleep on Sunday & Saturday 
+Users get the least amount of sleep on Tuesday & Thursday
+There is a positive correlation between sleep and highly active minutes 
+The more sleep a user get the more highly active minutes the user will partake in the following day 
+​
+**Recommendations**
+​
+* To increase usage, send weekly email campaigns about the importance sleep and     physically activity through the mobile app 
+* sendy daily notifications about and evening reminders for bedtime tracking 
+* If users are reporting low activty send up to 3 reminders 10am, 3pm, and 6pm to   keep users goals on track
+* Send users weekly reports
+* Create daily, weekly,and monthly challenges 
+​
+**Marketing Strategy**
+​
+* Women heath and wellness blogs 
+* Fitnesss influencers on social media (Instagram, Tiktok, etc) 
+* Ads and sponsorships
