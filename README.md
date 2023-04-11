@@ -1,3 +1,12 @@
+#  Google Data Analytics capstone project. Done in Microsoft Excel and MySQL. Datasets used are listed below:
+
+Fitabase: https://www.kaggle.com/datasets/arashnic/fitbit
+Dataset 2: https://www.kaggle.com/datasets/damirgadylyaev/more-than-4-years-of-steps-and-sleep-data-mi-band
+Dataset 3: https://www.kaggle.com/datasets/parulgarg123/mi-fitbit-dataset)
+
+
+
+
 # A Google Data Analytics capstone project. Done in Microsoft Excel and my SQL workbench 
 
 # Google-cousera-case-study
